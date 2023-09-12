@@ -12,7 +12,8 @@ className="bg-black text-white px-4 rounded-lg"
 </nav>
 <h1 className="head_text">AI Summerizer<br className="max-sm:hidden"/>
 <span className="orange_gradient head_text"> with Chat GPT-4</span></h1>
-<h2> hello there gitignore</h2>
+<h2 className='desc'> Simplify your reading with Summize, an open-source article summarizer
+        that transforms lengthy articles into clear and concise summaries </h2>
 
 </header>
 );
