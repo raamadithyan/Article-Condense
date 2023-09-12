@@ -12,7 +12,7 @@ className="bg-black text-white px-4 rounded-lg"
 </nav>
 <h1 className="head_text">AI Summerizer<br className="max-sm:hidden"/>
 <span className="orange_gradient head_text"> with Chat GPT-4</span></h1>
-
+<h2> hello there gitignore</h2>
 
 </header>
 );
