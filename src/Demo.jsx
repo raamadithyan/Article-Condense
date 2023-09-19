@@ -12,10 +12,11 @@ const [getSummary,{error,isFetching}] = useLazyGetSummaryQuery()
 
 	async function handleSubmit(e){
 		e.preventDefault()
+		try{
+
 		const {data} = await getSummary({
 			articleUrl:article.url
 		})
-		try{
 		if(data?.summary){
 			const newArticle ={...article,summary:data.summary}
 		setArticle(newArticle)
@@ -29,11 +30,11 @@ const [getSummary,{error,isFetching}] = useLazyGetSummaryQuery()
  
 	catch{
 		err=>{
-		console.log(err.response)
+		console.table(err.response)
 	}
 	}
 
-		alert("submitted")
+		// alert("submitted")	
 	}
 return (
  <section className='mt-8 w-full max-w-xl'>
@@ -61,6 +62,38 @@ className='absolute left-0 my-2 ml-3 w-5'
  	</button>
 
  	</form>
+ 	<div className='my-10 max-w-full flex items-center justify-center'>
+ 		{
+ 			isFetching ? (
+ 				<img src={loader} alt="loader"
+ 				  className='w-20 h-20 object-contain'
+ 				  />
+ 				) : error ? (
+ 				<p className='font-inter font-bold text-black text-center  '>
+ 					Something Wrong ! 🚫
+ 					<br/>
+ 					<span
+ 					className=' font-satoshi font-normal text-gray-700'
+ 					> {error?.data?.error}</span>
+ 				</p>
+ 				) : (
+ 				article.summary && (
+ 					<div className='flex flex-col gap-3'>
+ 						<h2 className='font-satoshi font-bold text-gray-700 text-xl'>
+ 							Article Condensed <span className='blue_gradient'>
+ 								
+ 							</span>
+ 						</h2>
+ 						<div>
+ 							{article.summary}
+ 						</div>
+ 					</div>
+ 					)
+ 				)
+
+ 		}
+
+ 	</div>
  </div>
 </section>
 );
