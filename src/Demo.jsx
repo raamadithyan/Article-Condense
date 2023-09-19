@@ -1,12 +1,38 @@
 import {useState,useEffect} from 'react';
 import { copy, linkIcon,loader,tick } from './assets';
+
+import { useLazyGetSummaryQuery } from './services/article';
 export default function Demo() {
 	const[article,setArticle]=useState({
 		url:"",
 		summary:""
 	})
 
-	async function handleSubmit(){
+const [getSummary,{error,isFetching}] = useLazyGetSummaryQuery()
+
+	async function handleSubmit(e){
+		e.preventDefault()
+		const {data} = await getSummary({
+			articleUrl:article.url
+		})
+		try{
+		if(data?.summary){
+			const newArticle ={...article,summary:data.summary}
+		setArticle(newArticle)
+
+
+
+		console.table(newArticle)
+		
+		}
+	}
+ 
+	catch{
+		err=>{
+		console.log(err.response)
+	}
+	}
+
 		alert("submitted")
 	}
 return (
@@ -16,8 +42,8 @@ return (
  	<form 
  	className=
  	"relative flex justify-center it2ems-center " 
- 	onSubmit={handleSubmit}
- 	action="">
+ 	onSubmit={handleSubmit}  
+ 	>
  	<img src={linkIcon} alt="link_icon"
 className='absolute left-0 my-2 ml-3 w-5'
  	/>
