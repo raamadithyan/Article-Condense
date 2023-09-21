@@ -1,3 +1,1 @@
-# Summarizer
-
-ChatGPT-4
+# Article Condense
